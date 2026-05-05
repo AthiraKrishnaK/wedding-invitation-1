@@ -18,7 +18,8 @@ A beautiful, responsive wedding invitation website built for sharing on social m
 [View Live Site](https://jidhu-devikeerthana-wedding.netlify.app/)
 
 ## 📸 Preview
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/e92706f6-a42a-41ea-9555-5efc36da8706" />
+<img width="1920" height="893" alt="Screenshot (495)" src="https://github.com/user-attachments/assets/dcf0dc26-c27b-45f9-a195-1655997af907" />
+
 
 
 ## 👩‍💻 Developer
