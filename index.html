@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!--  IMPORTANT: Fix mobile showing desktop view -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Enhanced Open Graph Tags for WhatsApp -->
+  <meta property="og:title" content="Jidhu Ram & Devi Keerthana Wedding Invitation">
+  <meta property="og:description" content="Marriage: 7:00 AM – 8:00 AM · Reception: 5:00 PM – 8:00 PM · 10 May 2026">
+  <meta property="og:image" content="https://jidhu-devikeerthana-wedding.netlify.app/images/og-cover.jpg">
+  <meta property="og:image:secure_url" content="https://jidhu-devikeerthana-wedding.netlify.app/images/og-cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:url" content="https://jidhu-devikeerthana-wedding.netlify.app">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Jidhu Ram & Devi Keerthana Wedding">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Jidhu Ram & Devi Keerthana | Wedding Invitation">
+  <meta name="twitter:description" content="Marriage: 7:00 AM – 8:00 AM · Reception: 5:00 PM – 8:00 PM · 10 May 2026">
+  <meta name="twitter:image" content="https://jidhu-devikeerthana-wedding.netlify.app/images/og-cover.jpg">
+
+  <link rel="preload" href="images/hero.jpg" as="image" fetchpriority="high">
+  <title>JidhuRam & DeviKeerthana | Wedding Invitation</title>
+
+  <!--  Correct link tags -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css?v=1.0" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Great+Vibes&family=Poppins:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap&v=1.0" rel="stylesheet">
+
+  <!-- Extra image hints -->
+  <link rel="image_src" href="https://jidhu-devikeerthana-wedding.netlify.app/images/og-cover.jpg">
+  <meta name="image" content="https://jidhu-devikeerthana-wedding.netlify.app/images/og-cover.jpg">
+
+  <style>
+    /* ===== FULL PAGE LOADER ===== */
+    #page-loader {
+      position: fixed;
+      inset: 0;
+      background: #7a1f1f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100000;
+    }
+
+    .loader-content {
+      text-align: center;
+      color: #e8d5a3;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .loader-heart {
+      font-size: 2.5rem;
+      animation: pulse 1.3s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.6; }
+    }
+
+    /* Hide website initially */
+    #main-content {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    #main-content.ready {
+      opacity: 1;
+    }
+
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8d5a3;
+      --gold-glow: rgba(201, 168, 76, 0.4);
+      --maroon: #7a1f1f;
+      --maroon-deep: #5a1515;
+      --cream: #faf6ef;
+      --cream-warm: #f5ede0;
+      --text-dark: #2c1810;
+      --text-body: #4a3728;
+      --text-muted: #8a7565;
+
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
+    }
+
+    * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      background: var(--cream);
+      color: var(--text-body);
+      overflow-x: hidden;
+      font-size: 1.1rem;
+      line-height: 1.75;
+      letter-spacing: 0.3px;
+      margin: 0;
+    }
+    body.locked { overflow: hidden; }
+
+    p.lead { font-size: 1.15rem; font-style: italic; margin-bottom: 0 !important; }
+
+    .text-maroon { color: var(--maroon) !important; }
+
+    /* Scroll Progress */
+    #scroll-progress {
+      position: fixed; top: 0; left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+      z-index: 9998;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* Music Toggle */
+    #music-toggle {
+      position: fixed;
+      bottom: calc(20px + var(--safe-bottom));
+      right: calc(20px + var(--safe-right));
+      z-index: 9990;
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      background: var(--maroon);
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    #music-toggle:hover { transform: scale(1.05); box-shadow: 0 6px 25px rgba(201, 168, 76, 0.35); }
+    #music-toggle.playing .music-icon { display: none; }
+    #music-toggle .music-pause { display: none; }
+    #music-toggle.playing .music-pause { display: block; }
+
+    .eq-bars { display: flex; gap: 2px; align-items: flex-end; height: 16px; }
+    .eq-bars span { width: 3px; background: var(--gold); border-radius: 1px; animation: eqBounce 0.8s infinite alternate; }
+    .eq-bars span:nth-child(1) { height: 6px; animation-delay: 0s; }
+    .eq-bars span:nth-child(2) { height: 12px; animation-delay: 0.2s; }
+    .eq-bars span:nth-child(3) { height: 8px; animation-delay: 0.4s; }
+    .eq-bars span:nth-child(4) { height: 14px; animation-delay: 0.1s; }
+    @keyframes eqBounce { 0% { transform: scaleY(0.3); } 100% { transform: scaleY(1); } }
+
+    /* Petals */
+    .petals-container { position: fixed; inset: 0; pointer-events: none; z-index: 9991; overflow: hidden; }
+    .petal { position: absolute; top: -30px; opacity: 0; animation: petalFall linear infinite; }
+    .petal svg { width: 100%; height: 100%; }
+    @keyframes petalFall {
+      0% { opacity: 0; transform: translateX(0) rotate(0deg) scale(0.8); }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.6; }
+      100% { opacity: 0; transform: translateX(var(--drift)) rotate(var(--spin)) scale(0.4); top: 105vh; }
+    }
+
+    /* Reveal Animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.revealed { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.25s; }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(90,21,21,.6), rgba(122,31,31,.4), rgba(44,24,16,.7));
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 2; width: 100%; max-width: 800px; }
+
+    .hero-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 6px;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .name-font {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(3rem, 12vw, 6.5rem);
+      color: white;
+      line-height: 1.1;
+      text-shadow: 0 6px 25px rgba(0,0,0,0.25);
+      margin: 10px 0;
+      letter-spacing: 1px;
+    }
+
+    .hero-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
+      color: var(--gold-light);
+      letter-spacing: 3px;
+      margin-top: 10px;
+    }
+
+    .scroll-cue { margin-top: 40px; font-size: 0.7rem; letter-spacing: 2px; opacity: 0.7; animation: bounce 2s infinite; }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+    /* Ultra-tight spacing */
+    .section { padding: 18px 0 !important; }
+    @media (max-width: 768px) { .section { padding: 14px 0 !important; } }
+    @media (max-width: 375px) { .section { padding: 10px 0 !important; } }
+
+    /* Headings */
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      color: var(--maroon);
+      font-size: clamp(1.35rem, 3.6vw, 2.2rem);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      line-height: 1.25;
+      margin-bottom: 0.25rem;
+    }
+
+    .section-subheading {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      margin-bottom: 10px !important;
+    }
+
+    @media (max-width: 480px) {
+      .section-heading { font-size: 1.25rem !important; margin-bottom: 0.5rem; }
+      .section-subheading { font-size: 0.9rem !important; margin-bottom: 15px !important; }
+      .reveal.mb-4 { margin-bottom: 1rem !important; }
+      .name-font { font-size: clamp(2.6rem, 11vw, 4.8rem); }
+      .detail-title { font-size: 1.15rem; }
+      .schedule-item h5 { font-size: 1.05rem; }
+    }
+
+    .bg-cream-alt { background: linear-gradient(180deg, var(--cream) 0%, var(--cream-warm) 100%); }
+    .bg-white-luxe { background: #fff; }
+
+    /* Glass Cards */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 8px 32px rgba(122, 31, 31, 0.08);
+      border-radius: 8px;
+      padding: 14px 12px !important;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+    }
+    @media (max-width: 375px) { .glass-card { padding: 10px !important; } }
+
+    .glass-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(122, 31, 31, 0.15); border-color: var(--gold); }
+    .detail-icon { font-size: 2.2rem; color: var(--gold); margin-bottom: 10px; text-shadow: 0 2px 10px var(--gold-glow); }
+    .detail-title { font-family: 'Playfair Display', serif; color: var(--maroon); font-size: 1.25rem; margin-bottom: 8px; }
+    .detail-text strong { color: var(--maroon); font-weight: 600; }
+    .detail-text p.mb-3 { margin-bottom: 6px !important; }
+
+    /* Countdown */
+    .countdown-wrapper { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .countdown-circle { position: relative; width: 100px; height: 100px; flex-shrink: 0; }
+    .countdown-circle svg { transform: rotate(-90deg); width: 100%; height: 100%; }
+    .countdown-circle .track { fill: none; stroke: #eee; stroke-width: 2; }
+    .countdown-circle .progress { fill: none; stroke: var(--maroon); stroke-width: 3; stroke-linecap: round; transition: stroke-dashoffset 1s ease; }
+    .countdown-value { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .countdown-value .num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--maroon); line-height: 1; }
+    .countdown-value .label { font-family: 'Poppins', sans-serif; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-top: 2px; }
+
+    @media (max-width: 768px) {
+      .countdown-circle { width: 70px; height: 70px; }
+      .countdown-value .num { font-size: 1.4rem; }
+      .countdown-value .label { font-size: 0.5rem; }
+      .countdown-circle .progress { stroke-width: 2.5; }
+    }
+    @media (max-width: 375px) {
+      .countdown-circle { width: 60px; height: 60px; }
+      .countdown-value .num { font-size: 1.2rem; }
+    }
+
+    @media (max-width: 480px) {
+      .countdown-wrapper { gap: 8px; }
+      .countdown-circle { width: 65px !important; height: 65px !important; }
+      .countdown-value .num { font-size: 1.1rem !important; }
+      .countdown-value .label { font-size: 0.45rem !important; margin-top: 0px; }
+      .countdown-circle .progress { stroke-width: 2 !important; }
+    }
+    @media (max-width: 375px) {
+      .countdown-circle { width: 55px !important; height: 55px !important; }
+      .countdown-value .num { font-size: 1rem !important; }
+      .countdown-value .label { font-size: 0.4rem !important; }
+    }
+
+    /* Lightbox */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .lightbox-overlay.active { display: flex; opacity: 1; }
+    .lightbox-overlay img { max-width: 95%; max-height: 90vh; border: 2px solid var(--gold); box-shadow: 0 0 30px rgba(201, 168, 76, 0.3); }
+    .lightbox-close { position: absolute; top: 20px; right: 20px; color: white; font-size: 2rem; cursor: pointer; background: none; border: none; }
+
+    /* Schedule Timeline - Mobile First */
+    .schedule-item {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px !important;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 8px;
+      border-left: 3px solid var(--gold) !important;
+    }
+    .schedule-time {
+      font-weight: 600;
+      color: var(--maroon);
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+    .schedule-item h5 {
+      font-family: 'Playfair Display', serif;
+      color: var(--maroon);
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
+    .schedule-item p {
+      color: var(--text-muted);
+      font-style: italic;
+      margin: 0;
+      font-size: 0.85rem;
+    }
+
+    /* Desktop view */
+    @media (min-width: 768px) {
+      .schedule-item {
+        flex-direction: row;
+        padding: 0;
+        background: transparent;
+        border-left: none !important;
+        margin-bottom: 14px !important;
+      }
+      .schedule-time {
+        text-align: right;
+        padding-right: 30px;
+        min-width: 160px;
+        margin-bottom: 0;
+      }
+      .schedule-line {
+        display: block;
+        width: 2px;
+        background: var(--gold-light);
+        margin: 0 20px;
+        height: 100%;
+        position: relative;
+      }
+      .schedule-line::before {
+        content: '';
+        position: absolute;
+        left: -4px;
+        top: 0;
+        width: 10px;
+        height: 10px;
+        background: var(--gold);
+        border-radius: 50%;
+        border: 2px solid white;
+        box-shadow: 0 0 0 2px var(--gold-light);
+      }
+    }
+
+    @media (max-width: 767px) {
+      .schedule-line { display: none !important; }
+    }
+
+    /* B/W Photo Section */
+    .bw-bg { background: #0b0b0b; color: #fff; }
+    .bw-photo-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.45);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .bw-photo-card img{
+      width: 100%;
+      height: auto;
+      display: block;
+      cursor: pointer;
+      opacity: 0;
+      filter: grayscale(100%) contrast(1.08);
+      transition: opacity 0.4s ease, transform 0.55s ease, filter 0.55s ease;
+    }
+    .bw-photo-card img.loaded{ opacity: 1; }
+    .bw-photo-wrap:hover img{
+      transform: scale(1.02);
+      filter: grayscale(0%) contrast(1.08);
+    }
+    .bw-caption { color: rgba(255,255,255,0.75); font-style: italic; margin-top: 6px !important; margin-bottom: 0 !important; }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(to top, var(--maroon-deep), var(--maroon));
+      color: var(--gold-light);
+      padding: 12px 0;
+      text-align: center;
+    }
+    footer h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.5rem;
+      margin: 0 0 4px;
+      line-height: 1.2;
+    }
+    footer .small { font-size: 0.75rem; line-height: 1.35; margin: 0; }
+
+    @media (max-width: 480px) {
+      footer { padding: 15px 0 !important; }
+      footer h2 { font-size: 1.2rem !important; margin-bottom: 6px; }
+      footer .small { font-size: 0.7rem !important; line-height: 1.4; }
+    }
+    @media (max-width: 375px) {
+      footer h2 { font-size: 1.1rem !important; }
+      footer .small { font-size: 0.65rem !important; }
+    }
+
+    @media (max-width: 768px) {
+      .container { padding-left: 16px !important; padding-right: 16px !important; }
+      .hero { padding-top: calc(40px + var(--safe-top)); padding-bottom: 30px; }
+      .hero-title { margin-bottom: 8px; letter-spacing: 3px; font-size: 0.7rem; }
+      .hero-date { margin-top: 5px; font-size: 1.2rem; }
+      .scroll-cue { margin-top: 25px; font-size: 0.65rem; }
+    }
+    .venue-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.venue-link:hover {
+  color: var(--maroon);
+}
+.venue-link::after {
+  content: "  ↗view location";
+  font-size: 0.75em;
+  opacity: 0.6;
+}
+  </style>
+</head>
+
+<body>
+  <!-- FULL PAGE LOADER -->
+  <div id="page-loader">
+    <div class="loader-content">
+      <div class="loader-heart">ॐ</div>
+      <p>Loading Invitation…</p>
+    </div>
+  </div>
+
+  <!-- Scroll Progress -->
+  <div id="scroll-progress"></div>
+
+  <!-- Lightbox -->
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()" style="cursor:pointer">
+    <button class="lightbox-close" onclick="event.stopPropagation(); closeLightbox()">✕</button>
+    <img id="lightbox-img" src="" alt="Enlarged photo">
+  </div>
+
+  <!-- Floating Petals -->
+  <div class="petals-container" id="petals-container"></div>
+
+  <!-- Music Toggle -->
+  <button id="music-toggle" aria-label="Toggle music">
+    <span class="music-icon">♪</span>
+    <span class="music-pause">
+      <span class="eq-bars"><span></span><span></span><span></span><span></span></span>
+    </span>
+  </button>
+
+  <audio id="bg-music" loop preload="auto">
+    <source src="wedding-music.mp3" type="audio/mpeg">
+  </audio>
+
+  <div id="main-content">
+
+    <!-- Hero -->
+    <section class="hero" role="banner">
+      <img src="images/hero.jpg" class="hero-img" onclick="openLightbox(this.src)"
+           width="1920" height="1080" fetchpriority="high" loading="eager" decoding="sync"
+           alt="Jidhu Ram and Devi Keerthana Wedding">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="hero-title">Wedding Invitation</p>
+        <h1 class="name-font">
+          <span class="d-block">Jidhu Ram</span>
+          <span style="font-size:0.6em; font-family:'Playfair Display'; color:var(--gold-light);">&</span>
+          <span class="d-block">Devi Keerthana</span>
+        </h1>
+        <p class="hero-date">10 · 05 · 2026</p>
+        <div class="scroll-cue">↓ Scroll to Explore ↓</div>
+      </div>
+    </section>
+
+    <!-- Blessing -->
+    <section class="section bg-white-luxe">
+      <div class="container text-center">
+        <div class="reveal">
+          <p style="font-size: 2rem; color: var(--gold); margin-bottom: 8px;">ॐ</p>
+          <h3 class="section-heading mb-3">
+            With the Blessings of Lord Ganesha <br>& <br> Our Families
+          </h3>
+        </div>
+
+        <div class="ornament-flourish reveal reveal-delay-1" style="margin: 8px auto;">
+          <svg viewBox="0 0 200 20" width="150" height="20">
+            <path d="M0 10 Q50 0 100 10 Q150 20 200 10" stroke="var(--gold)" fill="none" stroke-width="1"></path>
+          </svg>
+        </div>
+
+        <p class="lead reveal reveal-delay-2 mx-auto" style="max-width: 700px; color: var(--text-body); margin-bottom: 8px;">
+          We cordially invite you to witness and bless our sacred union as we begin our beautiful journey together according to Vedic Hindu traditions.
+        </p>
+      </div>
+    </section>
+
+    <!-- Our Journey -->
+    <section class="section bg-white-luxe">
+      <div class="container">
+        <div class="text-center reveal mb-4">
+          <h2 class="section-heading">Our Journey</h2>
+          <p class="section-subheading">Moments before forever</p>
+        </div>
+
+        <div class="d-flex flex-column align-items-center gap-3">
+          <div class="bw-photo-wrap w-100" style="max-width: 900px;">
+            <div class="bw-photo-card">
+              <img src="images/photo1.jpg" onclick="openLightbox(this.src)"
+                   width="900" height="600" loading="eager" decoding="sync" fetchpriority="low"
+                   alt="DeviKeerthana & Jidhu Ram">
+            </div>
+            <p class="text-center bw-caption">Forever begins with moments like these</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Details -->
+    <section class="section bg-white-luxe">
+      <div class="container">
+        <div class="text-center reveal mb-4">
+          <h2 class="section-heading">Wedding Details</h2>
+          <p class="section-subheading">Two ceremonies, one beautiful beginning</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+          <div class="col-md-6 col-lg-5 reveal reveal-delay-1">
+            <div class="glass-card text-center">
+              <div class="detail-icon">ॐ</div>
+              <h4 class="detail-title">Muhurtham Ceremony</h4>
+              <div class="detail-text">
+                <p class="mb-1"><strong>10 - 05 - 2026</strong></p>
+                <p class="mb-3">07:00 AM — 08:00 AM</p>
+                <div class="ornament" style="max-width:100px;">
+                  <span class="ornament-line"></span>
+                  <span class="ornament-diamond" style="width:4px;height:4px;"></span>
+                  <span class="ornament-line"></span>
+                </div>
+                <p class="mb-0 text-muted">Guruvayur Sree Krishna Temple<br>Guruvayur, Kerala</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-5 reveal reveal-delay-2">
+            <div class="glass-card text-center">
+              <div class="detail-icon">✻</div>
+              <h4 class="detail-title">Reception</h4>
+              <div class="detail-text">
+                <p class="mb-1"><strong>10 - 05 - 2026</strong></p>
+                <p class="mb-3">05:00 PM — 08:00 PM</p>
+                <div class="ornament" style="max-width:100px;">
+                  <span class="ornament-line"></span>
+                  <span class="ornament-diamond" style="width:4px;height:4px;"></span>
+                  <span class="ornament-line"></span>
+                </div>
+                <!-- <p class="mb-0 text-muted">
+                  Sri Chathan Master Memorial<br>Community Hall, V.R.Puram<br>
+                  Chalakudy, Kerala - 680722
+                </p> -->
+                <p class="mb-0 text-muted">
+  <a
+    href="https://www.google.com/maps/search/?api=1&query=Sri+Chathan+Master+Memorial+Community+Hall+VR+Puram+Chalakudy+Kerala"
+    target="_blank"
+    class="venue-link"
+  >
+    Sri Chathan Master Memorial<br>
+    Community Hall, V.R.Puram<br>
+    Chalakudy, Kerala - 680722
+  </a>
+</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Countdown -->
+    <section class="section bg-cream-alt text-center">
+      <div class="container">
+        <div class="reveal mb-4">
+          <h3 class="section-heading">The Auspicious Moment Is Near</h3>
+          <p class="text-muted fst-italic">Counting down to our forever</p>
+        </div>
+        <div class="countdown-wrapper reveal reveal-delay-1" id="countdown"></div>
+      </div>
+    </section>
+
+    <!-- Schedule -->
+    <section class="section bg-white-luxe">
+      <div class="container">
+        <div class="text-center reveal mb-4">
+          <h2 class="section-heading">Schedule of Celebrations</h2>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="schedule-item reveal reveal-delay-1">
+              <div class="schedule-line"></div>
+              <div class="schedule-time">7:00 AM - 8:00 AM</div>
+              <div>
+                <h5>Muhurtham Ceremony</h5>
+                <p>The Auspicious Wedding at Guruvayur Sree Krishna Temple</p>
+              </div>
+            </div>
+
+            <div class="schedule-item reveal reveal-delay-2">
+              <div class="schedule-line"></div>
+              <div class="schedule-time">05:00 PM - 08:00 PM</div>
+              <div>
+                <h5>Grand Reception</h5>
+                <p>Celebration dinner at Sri Chathan Master Memorial Community Hall</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="reveal">
+      <div class="container">
+        <h2>Jidhu Ram & DeviKeerthana</h2>
+        <p class="small opacity-75" style="margin:0;">Hosted by</p>
+        <p class="small opacity-75" style="margin:0;">Ajaykumar, Jiji Ajaykumar & Abhiram K Ajaykumar</p>
+        <p class="small opacity-50" style="margin-top:6px;">ॐ Shubh Vivah ॐ</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function revealSite() {
+      const loader = document.getElementById("page-loader");
+      const main = document.getElementById("main-content");
+
+      if (loader) loader.style.display = "none";
+      if (main) main.classList.add("ready");
+
+      initScrollReveal();
+
+      setTimeout(startPetals, 1200);
+      tryAutoPlayMusic();
+    }
+
+    let revealed = false;
+    const heroImg = document.querySelector('.hero-img');
+
+    Promise.all([
+      document.fonts.ready,
+      new Promise(resolve => {
+        if (heroImg.complete) resolve();
+        else heroImg.onload = resolve;
+      })
+    ]).then(() => requestAnimationFrame(safeReveal));
+
+    function safeReveal() {
+      if (revealed) return;
+      revealed = true;
+      revealSite();
+    }
+
+    // Absolute fallback (never block)
+    setTimeout(safeReveal, 3000);
+
+    // Scroll Progress (NaN-safe)
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+      document.getElementById("scroll-progress").style.width = scrolled + "%";
+    }, { passive: true });
+
+    // Scroll Reveal
+    function initScrollReveal() {
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const elements = document.querySelectorAll('.reveal');
+
+      if (prefersReducedMotion) {
+        elements.forEach(el => el.classList.add('revealed'));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      elements.forEach(el => observer.observe(el));
+    }
+
+    // Countdown (10 May 2026, 10:00 AM IST = 04:30 UTC)
+    const weddingDate = Date.UTC(2026, 4, 10, 4, 30, 0);
+    const circumference = 2 * Math.PI * 45;
+
+    function createCircle(label) {
+      return `<div class="countdown-circle">
+        <svg viewBox="0 0 100 100">
+          <circle class="track" cx="50" cy="50" r="45"></circle>
+          <circle class="progress" cx="50" cy="50" r="45"
+                  stroke-dasharray="${circumference}"
+                  stroke-dashoffset="${circumference}"></circle>
+        </svg>
+        <div class="countdown-value">
+          <span class="num">0</span>
+          <span class="label">${label}</span>
+        </div>
+      </div>`;
+    }
+
+    document.getElementById('countdown').innerHTML =
+      createCircle('Days') + createCircle('Hours') + createCircle('Mins') + createCircle('Secs');
+
+    function updateCountdown() {
+      const now = Date.now();
+      const distance = weddingDate - now;
+
+      if (distance < 0) {
+        document.getElementById("countdown").innerHTML =
+          '<h3 class="text-maroon">The sacred day has arrived!</h3>';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      const circles = document.querySelectorAll('.countdown-circle');
+      const values = [days, hours, minutes, seconds];
+      const maxes = [366, 24, 60, 60];
+
+      circles.forEach((circle, i) => {
+        circle.querySelector('.num').textContent = values[i];
+        const offset = circumference - (values[i] / maxes[i]) * circumference;
+        circle.querySelector('.progress').style.strokeDashoffset = offset;
+      });
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Lightbox
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      const lb = document.getElementById('lightbox');
+      lb.style.display = 'flex';
+      setTimeout(() => lb.classList.add('active'), 10);
+      document.body.classList.add('locked');
+    }
+    function closeLightbox() {
+      const lb = document.getElementById('lightbox');
+      lb.classList.remove('active');
+      setTimeout(() => {
+        lb.style.display = 'none';
+        document.body.classList.remove('locked');
+      }, 300);
+    }
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+    // Petals
+    function startPetals() {
+      const container = document.getElementById('petals-container');
+      const colors = ['#c9a84c', '#e8d5a3', '#7a1f1f'];
+
+      setInterval(() => {
+        if (document.querySelectorAll('.petal').length > 15) return;
+
+        const petal = document.createElement('div');
+        petal.className = 'petal';
+        const size = Math.random() * 10 + 10;
+
+        petal.style.cssText = `
+          width:${size}px; height:${size}px; left:${Math.random() * 100}%;
+          animation-duration:${Math.random() * 5 + 5}s; animation-delay:${Math.random() * 5}s;
+          --drift:${(Math.random() - 0.5) * 200}px; --spin:${(Math.random() - 0.5) * 360}deg;
+        `;
+
+        petal.innerHTML = `<svg viewBox="0 0 20 20">
+          <ellipse cx="10" cy="10" rx="6" ry="10"
+                   fill="${colors[Math.floor(Math.random() * colors.length)]}" opacity="0.6" />
+        </svg>`;
+
+        container.appendChild(petal);
+        setTimeout(() => petal.remove(), 10000);
+      }, 800);
+    }
+
+    // Music
+    const music = document.getElementById("bg-music");
+    const toggle = document.getElementById("music-toggle");
+
+    function tryAutoPlayMusic() {
+      music.play()
+        .then(() => {
+          toggle.style.display = "flex";
+          toggle.classList.add("playing");
+        })
+        .catch(() => {
+          toggle.style.display = "flex";
+        });
+    }
+    document.addEventListener('pointerdown', tryAutoPlayMusic, { once: true });
+
+    toggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (music.paused) {
+        music.play().then(() => toggle.classList.add("playing"));
+      } else {
+        music.pause();
+        toggle.classList.remove("playing");
+      }
+    });
+
+    document.querySelectorAll('.bw-photo-card img').forEach(img => {
+      if (img.complete) img.classList.add('loaded');
+      else img.onload = () => img.classList.add('loaded');
+    });
+
+    music.addEventListener('error', () => {
+      console.warn('Audio failed to load');
+      toggle.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
